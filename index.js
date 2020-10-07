@@ -1,3 +1,4 @@
+// Imports
 const express = require('express');
 require('dotenv').config();// leyendo variables de entrono
 const {dbConecction}  = require('./database/config');
@@ -12,6 +13,10 @@ const app = express();
 app.use(cors());
 
 
+/// Lectura y parseo del BODY
+app.use(express.json());
+
+
 //Base de Datos
 dbConecction();
 
@@ -19,12 +24,11 @@ dbConecction();
 
 
 //Rutas
-app.get('/',(req,res)=>{
-    res.json({
-        ok:true,
-        msg:'Hola Mundo'
-    })
-});
+app.use('/api/usuarios', require('./routes/usuarios') );
+app.use('/api/login', require('./routes/auth') );
+
+
+
 
 app.listen(process.env.PORT,()=>{
     console.log('Servidor corriendo '+process.env.PORT);
