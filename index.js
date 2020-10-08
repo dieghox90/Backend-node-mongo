@@ -20,7 +20,8 @@ app.use(express.json());
 //Base de Datos
 dbConecction();
 
-
+//Directorio publico
+app.use(express.static('public'));
 
 
 //Rutas
